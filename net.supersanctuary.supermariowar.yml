@@ -1,0 +1,32 @@
+app-id: net.supersanctuary.supermariowar
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
+sdk: org.freedesktop.Sdk
+command: smw
+build-options:
+  build-args:
+    - --share=network
+
+finish-args:
+  - --device=all
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --share=ipc
+  - --socket=pulseaudio
+
+modules:
+  - shared-modules/SDL2/SDL2-with-libdecor.json
+  - name: supermariowar
+    buildsystem: simple
+    build-commands:
+      - ls
+      - install -D smw /app/bin/smw
+      - install -D smw-leveledit /app/bin/smw-leveledit
+      - install -D smw-server /app/bin/smw-server
+      - install -D smw-worldedit /app/bin/smw-worldedit
+      - cp -rd data /app/bin/data
+    sources:
+      - type: archive
+        path: supermariowar_2022-05-23_linux.zip
+        sha512: 1d6ebe1a3e4f68322cc6c652d51e6f1e087d3d9d2a37777c6e2ac6df2c2b2bf4fee6d91304287d8f5a0f268d41a61478bdffb45463265ed4c3b722231f0209fc
+  
